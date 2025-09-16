@@ -8,7 +8,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    love.graphics.print(number +1)
+    love.graphics.print(number)
 end 
 
 --test :D
