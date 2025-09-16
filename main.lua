@@ -4,7 +4,7 @@ end
 
 
 function love.update(dt)
-    number = number + 1
+    number = number + 2
 end
 
 function love.draw()
