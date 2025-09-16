@@ -10,3 +10,5 @@ end
 function love.draw()
     love.graphics.print(number +1)
 end 
+
+--test :D
