@@ -8,16 +8,6 @@ end
 
 
 function love.update(dt)
-<<<<<<< Updated upstream
-    number = number + 2
-end
-
-function love.draw()
-    love.graphics.print(number)
-end 
-
---test :D
-=======
     number = number + 1
 
     Player:update(dt)
@@ -28,4 +18,3 @@ function love.draw()
 
     Player:draw()
 end
->>>>>>> Stashed changes
