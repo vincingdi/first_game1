@@ -1,4 +1,5 @@
 require("player")
+require("victory_screen")
 
 function love.load()
     number = 0
