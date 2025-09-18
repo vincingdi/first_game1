@@ -13,7 +13,6 @@ function love.update(dt)
 
     Player:update(dt)
 end
-
 function love.draw()
     love.graphics.print(number +1)
 
