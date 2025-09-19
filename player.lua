@@ -11,11 +11,17 @@ function Player:load()
     self.width = 40
     self.height = 40
     self.speed = 800
+    self.bullets = {}
 end
 
 function Player:update(dt)
     self:move(dt)
     self:checkBoundaries()
+    self:shoot_bullet()
+    for i = #self.bullets, 1, -1 do
+        local bullet = self.bullets[i]
+        bullet:move_bullet(dt)
+    end
 end
 
 function Player:move(dt)
@@ -50,27 +56,16 @@ end
 
 function Player:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
+    for _, bullet in ipairs(self.bullets) do
+        bullet:draw_bullet()
+    end
+end 
+
+function Player:shoot_bullet()
+    if love.keyboard.isDown("up") then
+        table.insert(self.bullets, Bullet.new(self.x, self.y, 1))
+    end
 end
-
--- Change inheritence of bullet
-function Player:load_bullet()
-    bullet_x = self.x
-    bullet_y = self.y
-    bullet_speed = 500
-    bullet_radius = 10
-end                 
-
-function Player:draw_bullet() 
-    love.graphics.setColor(0, 0, 1)
-    love.graphics.circle("fill", bullet_x, bullet_y, bullet_radius)
-    love.graphics.setColor(1, 1, 1)
-end
-
-
-function Player:move_bullet(dt)
-    bullet_y = bullet_y - bullet_speed * dt
-end
-
 
 
     
