@@ -1,4 +1,9 @@
+require("shoot_bullets")
+-- Inherit shooting
 Player = {}
+Player.__index = Player
+setmetatable(Player, Shoot)
+
 
 function Player:load()
     self.x = love.graphics.getWidth() / 2
@@ -46,4 +51,26 @@ end
 function Player:draw()
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
+
+-- Change inheritence of bullet
+function Player:load_bullet()
+    bullet_x = self.x
+    bullet_y = self.y
+    bullet_speed = 500
+    bullet_radius = 10
+end                 
+
+function Player:draw_bullet() 
+    love.graphics.setColor(0, 0, 1)
+    love.graphics.circle("fill", bullet_x, bullet_y, bullet_radius)
+    love.graphics.setColor(1, 1, 1)
+end
+
+
+function Player:move_bullet(dt)
+    bullet_y = bullet_y - bullet_speed * dt
+end
+
+
+
     
