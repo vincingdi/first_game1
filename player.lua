@@ -1,4 +1,4 @@
-require("shoot_bullets")
+require("bullet")
 -- Inherit shooting
 Player = {}
 Player.__index = Player
