@@ -8,5 +8,4 @@ function VictoryScreen:draw()
     love.graphics.clear()
     love.graphics.draw(victory_royale, 100, 100)
 
-
 end
