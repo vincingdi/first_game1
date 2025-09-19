@@ -2,7 +2,7 @@ require("shoot_bullets")
 -- Inherit shooting
 Player = {}
 Player.__index = Player
-setmetatable(Player, Shoot)
+setmetatable(Player, Bullet)
 
 
 function Player:load()
@@ -12,15 +12,29 @@ function Player:load()
     self.height = 40
     self.speed = 800
     self.bullets = {}
+    self.bulletTimer = 0
 end
 
 function Player:update(dt)
+
+    -- Timer to make bullets fly in with a slight delay one after the other
+    self.bulletTimer = self.bulletTimer + dt
+    
+    if self.bulletTimer > 0.2 then
+        self:shoot_bullet()
+        self.bulletTimer = 0
+    end
+
+
     self:move(dt)
     self:checkBoundaries()
-    self:shoot_bullet()
     for i = #self.bullets, 1, -1 do
         local bullet = self.bullets[i]
         bullet:move_bullet(dt)
+        -- Remove bullet if off screen
+        if bullet.bullet_y + bullet.bullet_radius < 0 then
+            table.remove(self.bullets, i)
+        end
     end
 end
 
@@ -55,15 +69,22 @@ function Player:checkBoundaries()
 end
 
 function Player:draw()
+    self.bulletTimer = self.bulletTimer + 1
+    
+
+
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
     for _, bullet in ipairs(self.bullets) do
-        bullet:draw_bullet()
+        if self.bulletTimer > 0.5 then
+            bullet:draw_bullet()
+            self.bulletTimer = 0
+        end
     end
 end 
 
 function Player:shoot_bullet()
     if love.keyboard.isDown("up") then
-        table.insert(self.bullets, Bullet.new(self.x, self.y, 1))
+        table.insert(self.bullets, Bullet.new(self.x + self.width / 2, self.y, 1))
     end
 end
 
