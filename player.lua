@@ -77,7 +77,7 @@ end
 
 function Player:shootBullet()
     if love.keyboard.isDown("up") then
-        table.insert(self.bullets, Bullet.new(self.x + self.width / 2, self.y, 1))
+        table.insert(self.bullets, Bullet.new(self.x + self.width / 2, self.y, 1, {0, 0, 1}))
     end
 end
 

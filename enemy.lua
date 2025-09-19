@@ -67,5 +67,5 @@ function Enemy:draw()
 end
 
 function Enemy:shootBullet() 
-    table.insert(self.bullets, Bullet.new(self.x+self.width, self.y+self.height, -1))
+    table.insert(self.bullets, Bullet.new(self.x+self.width, self.y+self.height, -1, {0, 1, 0}))
 end
