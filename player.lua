@@ -21,7 +21,7 @@ function Player:update(dt)
     self.bulletTimer = self.bulletTimer + dt
     
     if self.bulletTimer > 0.2 then
-        self:shoot_bullet()
+        self:shootBullet()
         self.bulletTimer = 0
     end
 
@@ -69,20 +69,13 @@ function Player:checkBoundaries()
 end
 
 function Player:draw()
-    self.bulletTimer = self.bulletTimer + 1
-    
-
-
     love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
     for _, bullet in ipairs(self.bullets) do
-        if self.bulletTimer > 0.5 then
-            bullet:draw_bullet()
-            self.bulletTimer = 0
-        end
+        bullet:draw_bullet()
     end
 end 
 
-function Player:shoot_bullet()
+function Player:shootBullet()
     if love.keyboard.isDown("up") then
         table.insert(self.bullets, Bullet.new(self.x + self.width / 2, self.y, 1))
     end

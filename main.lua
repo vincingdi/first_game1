@@ -10,7 +10,6 @@ end
 function love.update(dt)
     Player:update(dt)
     Enemy:update(dt)
- 
 end
 
 function love.draw()
